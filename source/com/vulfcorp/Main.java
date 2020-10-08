@@ -25,6 +25,7 @@ public class Main {
         System.out.println("SUM NUMBERS = "+statistic.getSumMatrixNumbers());
         System.out.println("AVG NUMBER = "+statistic.getAvgNumber());
         System.out.println("COUNT NOT NULL = "+statistic.countNotNullNumbers());
+        System.out.println("MAX NUMBER = "+statistic.maxNumberInMatrix());
         System.out.println("\n");
     }
 }

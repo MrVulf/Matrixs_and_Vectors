@@ -1,18 +1,52 @@
 package com.vulfcorp.impl;
 
-import com.vulfcorp.abstracts.AbstractIVector;
+import com.vulfcorp.interfaces.IVector;
 
-public class NormalVector extends AbstractIVector {
+import java.util.Arrays;
+
+public class NormalVector implements IVector {
+    int[] vector;
+
     public NormalVector(int size){
         if(size > 0) {
             vector = new int[size];
-            /*
-            for (int i = 0; i < size; i++)
-                vector[i] = (int) (Math.random() * 100);
-
-             */
         } else {
             throw new IllegalArgumentException("size should be >0 => size="+size);
         }
+    }
+
+    @Override
+    public void writeRecord(int position, int number) {
+        if(0 <= position && position < vector.length){
+            vector[position]=number;
+        } else {
+            throw new IllegalArgumentException("position should be [0,"+
+                    (vector.length-1)+"]. position="+position);
+        }
+    }
+
+    @Override
+    public int readRecord(int position) {
+        if (0 <= position && position < vector.length) {
+            return vector[position];
+        } else {
+            throw new IllegalArgumentException("position should be [0," +
+                    (vector.length - 1) + "]. position=" + position);
+        }
+    }
+
+    @Override
+    public int getSize() {
+        return vector.length;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder= new StringBuilder("{");
+        for(int i : vector) {
+            builder.append(" " + i + " ");
+        }
+        builder.append("}");
+        return builder.toString();
     }
 }

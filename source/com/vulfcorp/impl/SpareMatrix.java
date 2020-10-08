@@ -6,7 +6,7 @@ import com.vulfcorp.interfaces.IVector;
 public class SpareMatrix extends AbstractMatrix {
     public SpareMatrix(int lineCount, int columnCount) {
         IVector[] matrix;
-        if(lineCount >= 0 ||columnCount >= 0) {
+        if(lineCount > 0 ||columnCount > 0) {
             matrix = new IVector[lineCount];
             for (int i = 0; i < lineCount; i++) {
                 matrix[i] = new SpareVector(columnCount);
