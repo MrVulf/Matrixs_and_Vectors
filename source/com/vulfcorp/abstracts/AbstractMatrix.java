@@ -6,9 +6,15 @@ import com.vulfcorp.interfaces.IVector;
 import java.util.ArrayList;
 
 public abstract class AbstractMatrix implements IMatrix {
-    protected IVector[] matrix;
+    private IVector[] matrix;
     private int lineCount;
     private int columnCount;
+
+    protected void fillField(IVector[] matrix, int lineCount, int columnCount){
+        this.matrix = matrix;
+        this.columnCount = columnCount;
+        this.lineCount = lineCount;
+    }
 
     @Override
     public void writeRecord(int line, int column, int number) {
@@ -46,5 +52,19 @@ public abstract class AbstractMatrix implements IMatrix {
         boolean s1 = 0<=line && line< lineCount;
         boolean s2 = 0<=column && column <= columnCount;
         return s1 && s2;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < lineCount; i++){
+            builder.append("{");
+            for(int j = 0; j < columnCount; j++) {
+                int record = readRecord(i,j);
+                builder.append(" " +record+" ");
+            }
+            builder.append("}\n");
+        }
+        return builder.toString();
     }
 }
