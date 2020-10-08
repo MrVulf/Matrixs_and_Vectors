@@ -5,7 +5,7 @@ import com.vulfcorp.interfaces.IVector;
 import java.util.Arrays;
 
 public class NormalVector implements IVector {
-    int[] vector;
+    private int[] vector;
 
     public NormalVector(int size){
         if(size > 0) {
