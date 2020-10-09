@@ -21,21 +21,30 @@ public class SpareVector implements IVector {
 
     @Override
     public void writeRecord(int position, int number) {
-        if(0 <= position && position < size){
-            vector.put(position,number);
-        } else {
-            throw new IllegalArgumentException("position should be [0,"+
-                    (size-1)+"]. position="+position);
+        if(checkElementCanBeAdd()) {
+            if (0 <= position && position < size) {
+                vector.put(position, number);
+            }
+            else {
+                throw new IllegalArgumentException("position should be [0," +
+                        (size - 1) + "]. position=" + position);
+            }
+        }
+        else {
+            throw new IllegalArgumentException("SpareVector has max count not null elements for saving it's feature || position = "+position+", number = "+number);
         }
     }
 
     @Override
     public int readRecord(int position) {
         if(0 <= position && position < size){
-            return vector.get(position);
+            if(vector.containsKey(position))
+                return vector.get(position);
+            else
+                return 0;
         } else {
-            throw new IllegalArgumentException("position should be [0,"+
-                    (size-1)+"]. position="+position);
+            throw new IllegalArgumentException("position should be in "+
+                    vector.keySet()+" || position="+position);
         }
     }
 
@@ -56,4 +65,16 @@ public class SpareVector implements IVector {
         builder.append("}");
         return builder.toString();
     }
+
+    private boolean checkElementCanBeAdd(){
+        Double avg = ((double)vector.size()+1)/size;
+        if(avg.compareTo(0.5) <= 0)
+            return true;
+        else
+            return false;
+    }
+
+
+
+
 }

@@ -8,28 +8,44 @@ public class InitiatorMatrix {
         int columns = matrix.getColumnCount();
         int lines = matrix.getLineCount();
         int notNullNumbers = countNotNullNumbers;
-        for(int i = 0; i < lines; i++){
-            for(int j = 0; j < columns; j++){
-                if(CalculateChanceSetNotNull(countNotNullNumbers,columns*lines) && notNullNumbers!=0){
-                    matrix.writeRecord(i,j,getRandomNumber(maxNumber));
-                    notNullNumbers--;
-                }else{
-                    matrix.writeRecord(i,j,0);
-                }
-            }
-        }
+
+        if(countNotNullNumbers > columns*lines)
+            throw new IllegalArgumentException("Matrix's capacity = "+(columns*lines)+" | countNotNullNumbers = "+countNotNullNumbers);
+        /*
+            Follow the strategy
+        */
+        notNullNumbers = FillLikeSpareMatrix(matrix, notNullNumbers, maxNumber);
+        if(notNullNumbers!= 0)
+            FillLikeNormalMatrix(matrix, notNullNumbers, maxNumber);
 
         return matrix;
     }
 
-    private static boolean CalculateChanceSetNotNull(int countNotNullNumbers, int countMatrixNumbers) {
-        double probability = ((double)countNotNullNumbers)/ ((double)countMatrixNumbers);
-        double chance = Math.random();
 
-        if(probability < chance){
-            return true;
-        } else{
-            return false;
+    private static int FillLikeSpareMatrix(IMatrix matrix, int notNullNumbers, int maxNumber)
+    {
+        int columns = matrix.getColumnCount();
+        int lines = matrix.getLineCount();
+
+        for(int i = 0; i < lines && notNullNumbers!=0; i++){
+            for(int j = 1; j < columns && notNullNumbers!=0; j+=2){
+                matrix.writeRecord(i,j,getRandomNumber(maxNumber));
+                notNullNumbers--;
+            }
+        }
+        return notNullNumbers;
+    }
+
+    private static void FillLikeNormalMatrix(IMatrix matrix, Integer notNullNumbers, int maxNumber)
+    {
+        int columns = matrix.getColumnCount();
+        int lines = matrix.getLineCount();
+
+        for(int i = 0; i < lines && notNullNumbers!=0; i++){
+            for(int j = 0; j < columns && notNullNumbers!=0; j+=2){
+                matrix.writeRecord(i,j,getRandomNumber(maxNumber));
+                notNullNumbers--;
+            }
         }
     }
 
