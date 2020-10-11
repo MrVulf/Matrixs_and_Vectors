@@ -22,8 +22,8 @@ public class Main {
     private static void PrintStatisticInConsole(AbstractMatrix matrix){
         System.out.println(matrix.toString());
         StatisticMatrix statistic = new StatisticMatrix(matrix);
-        System.out.println("SUM NUMBERS = "+statistic.getSumMatrixNumbers());
-        System.out.println("AVG NUMBER = "+statistic.getAvgNumber());
+        System.out.println("SUM NUMBERS = "+statistic.sumMatrixNumbers());
+        System.out.println("AVG NUMBER = "+statistic.avgNumber());
         System.out.println("COUNT NOT NULL = "+statistic.countNotNullNumbers());
         System.out.println("MAX NUMBER = "+statistic.maxNumberInMatrix());
         System.out.println("\n");

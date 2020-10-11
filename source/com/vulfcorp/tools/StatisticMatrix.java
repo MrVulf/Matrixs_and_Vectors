@@ -13,7 +13,7 @@ public class StatisticMatrix {
         lines = matrix.getLineCount();
     }
 
-    public int getSumMatrixNumbers(){
+    public int sumMatrixNumbers(){
         int sum = 0;
         for(int i = 0; i < lines; i++) {
             for (int j = 0; j < columns; j++) {
@@ -23,8 +23,8 @@ public class StatisticMatrix {
         return sum;
     }
 
-    public double getAvgNumber(){
-        return getSumMatrixNumbers()/((double)lines*columns);
+    public double avgNumber(){
+        return sumMatrixNumbers()/((double)lines*columns);
     }
 
     public int maxNumberInMatrix(){
