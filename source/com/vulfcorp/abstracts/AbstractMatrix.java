@@ -58,9 +58,8 @@ public abstract class AbstractMatrix implements IMatrix {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for(int i = 0; i < lineCount; i++){
-            builder.append("{");
             builder.append(matrix[i].toString());
-            builder.append("}\n");
+            builder.append("\n");
         }
         return builder.toString();
     }

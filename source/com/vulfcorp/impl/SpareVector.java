@@ -21,17 +21,19 @@ public class SpareVector implements IVector {
 
     @Override
     public void writeRecord(int position, int number) {
-        if(checkElementCanBeAdd()) {
-            if (0 <= position && position < size) {
-                vector.put(position, number);
-            }
-            else {
-                throw new IllegalArgumentException("position should be [0," +
-                        (size - 1) + "]. position=" + position);
-            }
-        }
+        if(number == 0 && 0 <= position && position < size)
+            vector.remove(position);
         else {
-            throw new IllegalArgumentException("SpareVector has max count not null elements for saving it's feature || position = "+position+", number = "+number);
+            if (checkElementCanBeAdd()) {
+                if (0 <= position && position < size) {
+                    vector.put(position, number);
+                } else {
+                    throw new IllegalArgumentException("position should be [0," +
+                            (size - 1) + "]. position=" + position);
+                }
+            } else {
+                throw new IllegalArgumentException("SpareVector has max count not null elements for saving it's feature || position = " + position + ", number = " + number);
+            }
         }
     }
 
