@@ -3,8 +3,6 @@ package com.vulfcorp.abstracts;
 import com.vulfcorp.interfaces.IMatrix;
 import com.vulfcorp.interfaces.IVector;
 
-import java.util.ArrayList;
-
 public abstract class AbstractMatrix implements IMatrix {
     private IVector[] matrix;
     private int lineCount;
@@ -63,4 +61,20 @@ public abstract class AbstractMatrix implements IMatrix {
         }
         return builder.toString();
     }
+
+    protected void BuildMatrix (int lineCount, int columnCount){
+        IVector[] matrix;
+        if(lineCount > 0 && columnCount > 0) {
+            matrix = new IVector[lineCount];
+            for (int i = 0; i < lineCount; i++) {
+                matrix[i] = CreateVector(columnCount);
+            }
+        } else {
+            throw new IllegalArgumentException("lineCount and columnCount should be positive" +
+                    " || current: " + lineCount + " " + columnCount);
+        }
+        fillField(matrix, lineCount, columnCount);
+    }
+
+    protected abstract IVector CreateVector(int size);
 }
